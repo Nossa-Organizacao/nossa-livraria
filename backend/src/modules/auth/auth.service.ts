@@ -30,11 +30,11 @@ export class AuthService {
 
     return {
       token: this.jwtService.sign(
-        { email },
-        { subject: user.id },
-      ),
-      id: user.id,
-      email: email
+        { email, resetToken: user.resetToken },
+        { subject: user.id }
+      ),//Salva os dados na request.user
+      // id: user.id, //Aparece na resposta da requisição
+      // email: email
     };
   }
 }

@@ -5,7 +5,6 @@ import { User } from '../entities/user.entity';
 export abstract class UsersRepository {
   abstract create(data: CreateUserDto): Promise<User>;
   abstract findAll(): Promise<User[]>;
-  abstract findAllProfile(): Promise<User[] | []>;
   abstract findOne(id: string): Promise<User>;
   abstract findByEmail(email: string): Promise<User>;
   abstract findByToken(token: string): Promise<User>;

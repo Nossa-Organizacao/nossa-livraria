@@ -4,10 +4,8 @@ import {
   IsString,
   IsEmail,
   MinLength,
-  IsInt,
   IsNotEmpty,
   IsOptional,
-  IsBoolean,
 } from 'class-validator';
 import { hashSync } from 'bcryptjs';
 
@@ -53,16 +51,6 @@ export class CreateUserDto {
   @IsOptional()
   @IsString()
   avatar: string | null;
-
-  // @ApiPropertyOptional({ default: false })
-  // @IsOptional()
-  // @IsBoolean()
-  // seller: boolean;
-
-  // @ApiPropertyOptional({ default: 15 })
-  // @IsInt()
-  // @IsOptional()
-  // number: number | null;
 
   @ApiPropertyOptional({ default: null })
   @IsString()

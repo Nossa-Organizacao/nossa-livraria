@@ -15,7 +15,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtauthGuard } from '../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -32,6 +32,8 @@ import { ConflictSwagger } from 'src/helpers/swagger/conflict.swagger';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { NotFoundSwagger } from 'src/helpers/swagger/not-found.swagger';
 import { UnauthorizedSwagger } from 'src/helpers/swagger/unauthorized.swagger';
+import { UserAdmPermissionGuard } from './guards/userAdm-permission.guard';
+import { UserPermissionGuard } from './guards/user-permission.guard';
 
 @ApiTags('Users')
 @Controller('users')
@@ -67,24 +69,10 @@ export class UsersController {
     description: 'Lista de usuários',
     isArray: true,
   })
-  @UseGuards(JwtauthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   findAll() {
     return this.usersService.findAll();
-  }
-
-  @UseInterceptors(ClassSerializerInterceptor)
-  @Get('profile')
-  @ApiOperation({
-    summary: 'Listar todos os veículos pertencentes a todos os usuários.',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Lista de usuários',
-    isArray: true,
-  })
-  findAllProfile() {
-    return this.usersService.findAllProfile();
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -104,7 +92,7 @@ export class UsersController {
     description: 'Você não tem permissão de acessar os dados do usuário.',
     type: UnauthorizedSwagger,
   })
-  @UseGuards(JwtauthGuard)
+  @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.findOne(id);
@@ -127,7 +115,7 @@ export class UsersController {
     description: 'Você não tem permissão de acessar os dados do usuário.',
     type: UnauthorizedSwagger,
   })
-  @UseGuards(JwtauthGuard)
+  @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
@@ -150,7 +138,7 @@ export class UsersController {
     description: 'Você não tem permissão para deletar o usuário.',
     type: UnauthorizedSwagger,
   })
-  @UseGuards(JwtauthGuard)
+  @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
@@ -168,11 +156,10 @@ export class UsersController {
     description: 'Usuário não encontrado!',
     type: NotFoundSwagger,
   })
-  // async sendEmailResetPassword(@Body() informEmailDto: InformEmailDto) {
-  //   await this.usersService.sendEmailResetPassword(informEmailDto);
-  //   return { message: 'token send' };
-  // }
-
+  async sendEmailResetPassword(@Body() informEmailDto: InformEmailDto) {
+    await this.usersService.sendEmailResetPassword(informEmailDto);
+    return { message: 'token send' };
+  }
   @Patch('resetPassword/:token')
   @ApiOperation({ summary: 'Editar a senha de um usuário.' })
   @ApiResponse({
