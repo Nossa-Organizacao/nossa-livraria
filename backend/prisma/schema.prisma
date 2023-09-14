@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id String @id
+  name String
+  email String @unique
+  password String
+  initials String
+  birthDate String
+  aboutMe String?
+  color String
+  createdAt DateTime @default(now())
+  avatar String?
+  resetToken String?
+
+  books Book[]
+  comments Comment[]
+
+   @@map("user")
+}
+
+model Book {
+  id String @id
+  title String
+  synopsis String?
+  cover String?
+  status Boolean? @default(false)
+  score String
+  maiority Boolean @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  chapters Chapter[]
+  genders BookGender[]
+  comments Comment[]
+
+  @@map("books")
+}
+
+model Comment {
+  id String @id
+  text String
+  createdAt DateTime @default(now())
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  chapter  Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId String
+
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId String
+
+  @@map("comments")
+}
+
+model Chapter {
+  id String @id
+  text String
+  title String
+  createdAt DateTime @default(now())
+
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId String
+
+  comments Comment[]
+
+  @@map("chapters")
+}
+
+model Gender {
+  id String @id
+  text String
+
+  books BookGender[]
+
+  @@map("genders")
+}
+
+model BookGender {
+  id String @id
+
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId String
+
+  gender Gender @relation(fields: [genderId], references: [id], onDelete: Cascade)
+  genderId String
+
+  @@unique([bookId, genderId])
+}
+
