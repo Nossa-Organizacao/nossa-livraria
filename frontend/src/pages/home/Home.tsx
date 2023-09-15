@@ -1,12 +1,7 @@
-import { Header } from "../../components/header/Header";
 import { Main } from "./HomeStyle";
 
-const Home = () => {
-  return (
-    <Main>
-      <Header />
-    </Main>
-  );
+const HomePage = () => {
+  return <Main>Pagina Home</Main>;
 };
 
-export { Home };
+export { HomePage };
