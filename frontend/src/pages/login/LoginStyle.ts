@@ -4,11 +4,11 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  padding-top: 5rem;
+  padding: 5rem 1rem 15rem 1rem;
   width: 100%;
   min-height: 100vh;
   background-color: var(--color-branch-00);
+  position: relative;
 
   form {
     display: flex;

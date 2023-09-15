@@ -4,6 +4,7 @@ import { Main } from "./RegisterStyle";
 import { useForm } from "react-hook-form";
 import { TUserRegiste, schemaUserRegister } from "../../schemas/users.schemas";
 import { Button } from "../../components/button/ButtonDefault";
+import { Footer } from "../../components/footer/Footer";
 
 const RegisterPage = () => {
   const {
@@ -134,6 +135,7 @@ const RegisterPage = () => {
             Registrar
           </Button>
         </form>
+        <Footer />
       </Main>
     </>
   );

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { TLoginRequest, schemaLoginRequest } from "../../schemas/login.schemas";
 import { Button } from "../../components/button/ButtonDefault";
 import { Header } from "../../components/header/Header";
+import { Footer } from "../../components/footer/Footer";
 
 const LoginPage = () => {
   const {
@@ -61,6 +62,7 @@ const LoginPage = () => {
             </div>
           </div>
         </form>
+        <Footer />
       </Main>
     </>
   );

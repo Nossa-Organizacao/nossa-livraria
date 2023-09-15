@@ -4,10 +4,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  padding-top: 5rem;
+  padding: 5rem 1rem 15rem 1rem;
   width: 100%;
   min-height: 100vh;
+  position: relative;
   background-color: var(--color-branch-00);
 
   form {
@@ -53,12 +53,6 @@ const Main = styled.main`
   /* input:focus {
     border: 1px solid var(--color-brand-brand-1);
   } */
-
-  a {
-    color: var(--color-grey-grey-2);
-    align-self: flex-end;
-    padding: 1rem 0;
-  }
 
   /* a:hover {
     color: var(--color-brand-brand-1);
