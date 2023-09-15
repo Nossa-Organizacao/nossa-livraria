@@ -7,8 +7,8 @@ const HeaderStyle = styled.header`
   width: 100%;
   height: 90px;
   background-color: var(--color-branch-02);
-  position: absolute;
-  top: 0;
+  /* position: absolute;
+  top: 0; */
 `;
 
 export { HeaderStyle };
