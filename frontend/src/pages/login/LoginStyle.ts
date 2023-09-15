@@ -4,10 +4,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
   padding: 1rem;
-  /* padding-bottom: 950px; */
+  padding-top: 5rem;
+  width: 100%;
+  min-height: 100vh;
   background-color: var(--color-branch-00);
 
   form {
@@ -18,7 +18,7 @@ const Main = styled.main`
     padding: 3rem;
     gap: 15px;
     border-radius: 5px;
-    margin: 3rem 0;
+    margin: 3rem;
     background-color: var(--color-white);
   }
 
@@ -70,7 +70,7 @@ const Main = styled.main`
     align-items: center;
   }
 
-  button {
+  .buttons > button {
     padding: 1rem 2rem;
     text-align: center;
     border-radius: 5px;
