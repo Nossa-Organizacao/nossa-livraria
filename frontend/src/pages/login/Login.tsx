@@ -1,19 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Main } from "./LoginStyle";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { TLoginRequest, schemaLoginRequest } from "../../schemas/login.schemas";
+import { Button } from "../../components/button/ButtonDefault";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TLoginRequest>({
     mode: "onBlur",
-    // resolver: zodResolver(requestLoginSchema),
+    resolver: zodResolver(schemaLoginRequest),
   });
+
+  const onSubmitFunction = (data: TLoginRequest) => {
+    console.log(data);
+  };
 
   return (
     <Main>
@@ -44,7 +48,9 @@ const LoginPage = () => {
           <Link to="/emailNewPassword">Esqueci minha senha</Link>
 
           <div className="buttons">
-            <button>Entrar</button>
+            <Button type="submit" $width={0}>
+              Entrar
+            </Button>
 
             <span>Ainda não possui conta ?</span>
 

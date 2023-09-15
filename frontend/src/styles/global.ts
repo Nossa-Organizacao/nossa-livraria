@@ -7,6 +7,10 @@ body {
 	min-height: 100vh !important;
 }
 
+.error{
+    color: red;
+  }
+
 :root {
 	--color-branch-00:#2f363c;
 	--color-branch-01:#2b3034;
@@ -15,6 +19,20 @@ body {
 	--color-green-05:#143019;
 	--color-black:#0d1d10;
 	--color-white:#f9feff;
+
+
+	--color-grey-scale-0: #0b0d0d;
+	--color-grey-scale-1: #212529;
+	--color-grey-scale-2: #495057;
+	--color-grey-scale-3: #868e96;
+	--color-grey-scale-4: #adb5bd;
+	--color-grey-scale-5: #ced4da;
+	--color-grey-scale-6: #dee2e6;
+	--color-grey-scale-7: #e9ecef;
+	--color-grey-scale-8: #f1f3f5;
+	--color-grey-scale-9: #f8f9fa;
+	--color-grey-scale-10: #fdfdfd;
+	/* --color-fixed-white-fixed: #ffffff; */
 
 	--modal-background: rgba(33, 37, 41, 0.6);
 

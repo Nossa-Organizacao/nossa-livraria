@@ -10,6 +10,10 @@ export const schemaLoginRequest = z.object({
   password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres."),
 });
 
-export const responseLoginSchema = z.object({
+export const schemaLoginResponse = z.object({
   token: z.string(),
 });
+
+export type TLoginRequest = z.infer<typeof schemaLoginRequest>;
+
+export type TLoginResponse = z.infer<typeof schemaLoginResponse>;
