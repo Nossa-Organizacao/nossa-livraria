@@ -6,7 +6,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repositories/users.repository';
-// import { MailService } from '../utils/mail.service';
+import { MailService } from './utils/mail.service';
 import { randomUUID } from 'crypto';
 import {
   InformEmailDto,
@@ -19,7 +19,7 @@ import { User } from '@prisma/client';
 export class UsersService {
   constructor(
     private usersRepository: UsersRepository,
-    // private mailService: MailService,
+    private mailService: MailService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -38,10 +38,6 @@ export class UsersService {
 
   async findAll() {
     return this.usersRepository.findAll();
-  }
-
-  async findAllProfile() {
-    return this.usersRepository.findAllProfile();
   }
 
   async findOne(id: string) {
@@ -80,27 +76,27 @@ export class UsersService {
     return this.usersRepository.delete(id);
   }
 
-  // async sendEmailResetPassword(informEmailDto: InformEmailDto) {
-  //   const user: User | null = await this.usersRepository.findByEmail(
-  //     informEmailDto.email,
-  //   );
+  async sendEmailResetPassword(informEmailDto: InformEmailDto) {
+    const user: User | null = await this.usersRepository.findByEmail(
+      informEmailDto.email,
+    );
 
-  //   if (!user) {
-  //     throw new NotFoundException('User Not found');
-  //   }
+    if (!user) {
+      throw new NotFoundException('User Not found');
+    }
 
-  //   const resetToken: string = randomUUID();
+    const resetToken: string = randomUUID();
 
-  //   await this.usersRepository.updateToken(informEmailDto.email, resetToken);
+    await this.usersRepository.updateToken(informEmailDto.email, resetToken);
 
-  //   const resetPasswordTemplate = await this.mailService.resetPasswordTemplate(
-  //     informEmailDto.email,
-  //     user.name,
-  //     resetToken,
-  //   );
+    const resetPasswordTemplate = await this.mailService.resetPasswordTemplate(
+      informEmailDto.email,
+      user.name,
+      resetToken,
+    );
 
-  //   await this.mailService.sendEmail(resetPasswordTemplate);
-  // }
+    await this.mailService.sendEmail(resetPasswordTemplate);
+  }
 
   async resetPassword(
     informNewPasswordDto: InformNewPasswordDto,
