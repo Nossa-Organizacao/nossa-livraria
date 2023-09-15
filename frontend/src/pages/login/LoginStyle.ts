@@ -5,9 +5,9 @@ const Main = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 1rem;
-  padding-bottom: 950px;
+  /* padding-bottom: 950px; */
   background-color: var(--color-branch-00);
 
   form {
