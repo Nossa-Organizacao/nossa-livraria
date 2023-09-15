@@ -30,7 +30,7 @@ const LoginPage = () => {
           <div>
             <label htmlFor="email">Email</label>
             <input
-              type="text"
+              type="email"
               id="email"
               placeholder="Ex: samuel@kenzie.com.br"
               {...register("email")}

@@ -1,7 +1,7 @@
 import { z } from "zod";
 // import { advertSchema } from "./adverts.schemas";
 
-export const userSchema = z.object({
+export const schemaUser = z.object({
   id: z.number(),
 
   name: z.string().min(1, {
@@ -37,7 +37,7 @@ export const userSchema = z.object({
   resetToken: z.string().nullish(),
 });
 
-export const userSchemaRegister = userSchema
+export const schemaUserRegister = schemaUser
   .omit({
     id: true,
     createdAt: true,
@@ -53,7 +53,7 @@ export const userSchemaRegister = userSchema
     path: ["confirm_password"],
   });
 
-export const userSchemaRequest = userSchema.omit({
+export const schemaUserRequest = schemaUser.omit({
   id: true,
   createdAt: true,
 });
@@ -66,7 +66,7 @@ export const userSchemaRequest = userSchema.omit({
 //   adverts: z.optional(advertSchema).array(),
 // });
 
-export const userSchemaUpdate = userSchema
+export const schemaUserUpdate = schemaUser
   .omit({
     id: true,
     color: true,
@@ -77,3 +77,7 @@ export const userSchemaUpdate = userSchema
   .partial();
 
 // export const usersSchema = userSchemaResponse.array();
+
+export type TUser = z.infer<typeof schemaUser>;
+
+export type TUserRegiste = z.infer<typeof schemaUserRegister>;
