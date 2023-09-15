@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 const Main = styled.main`
   display: flex;
@@ -7,8 +7,8 @@ const Main = styled.main`
   padding: 5rem 1rem 15rem 1rem;
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-branch-00);
   position: relative;
+  background-color: var(--color-branch-00);
 
   form {
     display: flex;
@@ -54,23 +54,11 @@ const Main = styled.main`
     border: 1px solid var(--color-brand-brand-1);
   } */
 
-  a {
-    color: var(--color-grey-grey-2);
-    align-self: flex-end;
-    padding: 1rem 0;
-  }
-
   /* a:hover {
     color: var(--color-brand-brand-1);
   } */
 
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .buttons > button {
+  .registeButton {
     padding: 1rem 2rem;
     text-align: center;
     border-radius: 5px;
@@ -79,24 +67,6 @@ const Main = styled.main`
     color: var(--color-white);
     background-color: var(--color-grey-scale-2);
   }
-
-  /* button:hover {
-    border: solid 2px var(--color-grey-scale-grey-0);
-  } */
-
-  .buttons > a {
-    padding: 1rem 2rem;
-    text-align: center;
-    border-radius: 5px;
-    width: 100%;
-    color: var(--color-white);
-    background-color: var(--color-grey-scale-2);
-    /* border: 2px solid var(--color-grey-scale-grey-3); */
-  }
-
-  /* .buttons > a:hover {
-    border: solid 2px var(--color-grey-scale-grey-0);
-  } */
 `;
 
 export { Main };
