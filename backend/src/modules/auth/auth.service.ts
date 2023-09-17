@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
-import { UsersService } from '../user/users.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -31,8 +31,8 @@ export class AuthService {
     return {
       token: this.jwtService.sign(
         { email, resetToken: user.resetToken },
-        { subject: user.id }
-      ),//Salva os dados na request.user
+        { subject: user.id },
+      ), //Salva os dados na request.user
       // id: user.id, //Aparece na resposta da requisição
       // email: email
     };

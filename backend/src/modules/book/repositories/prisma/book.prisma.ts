@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { BooksRepository } from '../books.repository';
+import { BookRepository } from '../book.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateBookDto } from '../../dtos/create-book.dto';
 import { Book } from '../../entities/book.entity';
 
 @Injectable()
-export class BooksPrismaRepository implements BooksRepository {
+export class BookPrismaRepository implements BookRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateBookDto, userId: string): Promise<Book> {
@@ -40,6 +40,7 @@ export class BooksPrismaRepository implements BooksRepository {
         chapters: true,
         genders: true,
         comments: true,
+        user: true
       },
     });
     return books;
@@ -73,5 +74,4 @@ export class BooksPrismaRepository implements BooksRepository {
       where: { id },
     });
   }
-
 }

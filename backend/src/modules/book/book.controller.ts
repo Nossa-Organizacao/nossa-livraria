@@ -15,7 +15,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { BooksService } from './books.service';
+import { BookService } from './book.service';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateBookDto } from './dtos/create-book.dto';
@@ -26,8 +26,8 @@ import { ownerBookPermissionGuard } from './guards/updateOrDeletePermission.guar
 
 @ApiTags('Books')
 @Controller('books')
-export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+export class BookController {
+  constructor(private readonly bookService: BookService) {}
 
   @Post()
   @ApiOperation({ summary: 'Cadastrar um livro.' })
@@ -44,7 +44,7 @@ export class BooksController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   create(@Body() data: CreateBookDto, @Request() req) {
-    return this.booksService.create(data, req.user.id);
+    return this.bookService.create(data, req.user.id);
   }
 
   @Get()
@@ -57,7 +57,7 @@ export class BooksController {
     // type: CarsPaginationSwagger,
   })
   findAll() {
-    return this.booksService.findAll();
+    return this.bookService.findAll();
   }
 
   @Get(':id')
@@ -74,9 +74,8 @@ export class BooksController {
     description: 'Livro não encontrado!',
     type: NotFoundSwagger,
   })
-  @UseGuards(JwtAuthGuard, ownerBookPermissionGuard)
   findOne(@Param('id') id: string) {
-    return this.booksService.findOne(id);
+    return this.bookService.findOne(id);
   }
 
   @Patch(':id')
@@ -100,7 +99,7 @@ export class BooksController {
   })
   @UseGuards(JwtAuthGuard, ownerBookPermissionGuard)
   update(@Param('id') id: string, @Body() data: UpdateBookDto) {
-    return this.booksService.update(id, data);
+    return this.bookService.update(id, data);
   }
 
   @Delete(':id')
@@ -123,6 +122,6 @@ export class BooksController {
   })
   @UseGuards(JwtAuthGuard, ownerBookPermissionGuard)
   remove(@Param('id') id: string) {
-    return this.booksService.remove(id);
+    return this.bookService.remove(id);
   }
 }

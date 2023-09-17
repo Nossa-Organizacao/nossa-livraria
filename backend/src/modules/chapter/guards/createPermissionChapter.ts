@@ -9,14 +9,14 @@ import { UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 import { User } from 'src/modules/user/entities/user.entity';
 
-export class ownerBookPermissionException extends UnauthorizedException {
+export class createChapterPermissionException extends UnauthorizedException {
   constructor() {
-    super('Only the author of the book can make changes.');
+    super('Book does not belong to the user');
   }
 }
 
 @Injectable()
-export class ownerBookPermissionGuard implements CanActivate {
+export class createChapterPermissionGuard implements CanActivate {
   constructor(private prisma: PrismaService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -26,7 +26,7 @@ export class ownerBookPermissionGuard implements CanActivate {
 
     const userId = user.id;
 
-    const bookId = request.params.id;
+    const bookId = request.body.bookId;
 
     const book = await this.prisma.book.findFirst({
       where: {
@@ -39,7 +39,7 @@ export class ownerBookPermissionGuard implements CanActivate {
     }
 
     if (book.userId != userId) {
-      throw new ownerBookPermissionException();
+      throw new createChapterPermissionException();
     }
 
     return true;

@@ -12,7 +12,7 @@ import {
   ClassSerializerInterceptor,
   HttpCode,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -37,8 +37,8 @@ import { UserPermissionGuard } from './guards/user-permission.guard';
 
 @ApiTags('Users')
 @Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly userService: UserService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
@@ -58,7 +58,7 @@ export class UsersController {
     type: BadRequestSwagger,
   })
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    return this.userService.create(createUserDto);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -72,7 +72,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   findAll() {
-    return this.usersService.findAll();
+    return this.userService.findAll();
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -95,7 +95,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.usersService.findOne(id);
+    return this.userService.findOne(id);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -118,7 +118,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
@@ -141,7 +141,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, UserPermissionGuard)
   @ApiBearerAuth()
   remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+    return this.userService.remove(id);
   }
 
   @HttpCode(200)
@@ -157,7 +157,7 @@ export class UsersController {
     type: NotFoundSwagger,
   })
   async sendEmailResetPassword(@Body() informEmailDto: InformEmailDto) {
-    await this.usersService.sendEmailResetPassword(informEmailDto);
+    await this.userService.sendEmailResetPassword(informEmailDto);
     return { message: 'token send' };
   }
   @Patch('resetPassword/:token')
@@ -175,7 +175,7 @@ export class UsersController {
     @Param() tokenDto: TokenDto,
     @Body() informNewPasswordDto: InformNewPasswordDto,
   ) {
-    await this.usersService.resetPassword(informNewPasswordDto, tokenDto);
+    await this.userService.resetPassword(informNewPasswordDto, tokenDto);
 
     return { message: 'Password change with sucess!' };
   }
