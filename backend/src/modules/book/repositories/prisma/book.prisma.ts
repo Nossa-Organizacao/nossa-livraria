@@ -38,9 +38,8 @@ export class BookPrismaRepository implements BookRepository {
     const books: Book[] | [] = await this.prisma.book.findMany({
       include: {
         chapters: true,
-        genders: true,
-        comments: true,
-        user: true
+        user: true,
+        fans: true
       },
     });
     return books;
@@ -50,7 +49,6 @@ export class BookPrismaRepository implements BookRepository {
     const book: Book = await this.prisma.book.findFirst({
       where: { id },
       include: {
-        genders: true,
         chapters: true,
       },
     });
@@ -61,7 +59,6 @@ export class BookPrismaRepository implements BookRepository {
     const book: Book = await this.prisma.book.update({
       where: { id },
       include: {
-        genders: true,
         chapters: true,
       },
       data: { ...data },

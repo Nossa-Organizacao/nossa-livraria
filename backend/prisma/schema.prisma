@@ -23,6 +23,8 @@ model User {
   avatar String?
   resetToken String?
 
+  favorites UserSeguir[]
+
   books Book[]
   comments Comment[]
 
@@ -38,13 +40,14 @@ model Book {
   score String
   maiority Boolean @default(false)
   createdAt DateTime @default(now())
+  gender String[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
+  fans UserSeguir[]
+
   chapters Chapter[]
-  genders BookGender[]
-  comments Comment[]
 
   @@map("books")
 }
@@ -60,9 +63,6 @@ model Comment {
 
   chapter  Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   chapterId String
-
-  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
-  bookId String
 
   @@map("comments")
 }
@@ -81,24 +81,14 @@ model Chapter {
   @@map("chapters")
 }
 
-model Gender {
-  id String @id
-  text String
-
-  books BookGender[]
-
-  @@map("genders")
-}
-
-model BookGender {
+model UserSeguir {
   id String @id
 
   book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId String
 
-  gender Gender @relation(fields: [genderId], references: [id], onDelete: Cascade)
-  genderId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
-  @@unique([bookId, genderId])
+  @@unique([bookId, userId])
 }
-
