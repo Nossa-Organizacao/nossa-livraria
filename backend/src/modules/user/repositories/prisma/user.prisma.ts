@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from '../users.repository';
+import { UserRepository } from '../user.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { User } from '../../entities/user.entity';
@@ -8,7 +8,7 @@ import { UpdateUserDto } from '../../dto/update-user.dto';
 import { hashSync } from 'bcryptjs';
 
 @Injectable()
-export class UsersPrismaRepository implements UsersRepository {
+export class UserPrismaRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateUserDto): Promise<User> {
@@ -30,10 +30,10 @@ export class UsersPrismaRepository implements UsersRepository {
 
     return plainToInstance(User, users);
   }
-  
+
   async findOne(id: string): Promise<User> {
     const user: User | null = await this.prisma.user.findUnique({
-      where: { id }
+      where: { id },
     });
 
     return plainToInstance(User, user);

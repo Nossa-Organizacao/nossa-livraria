@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersRepository } from './repositories/users.repository';
+import { UserRepository } from './repositories/user.repository';
 import { MailService } from './utils/mail.service';
 import { randomUUID } from 'crypto';
 import {
@@ -16,14 +16,14 @@ import {
 import { User } from '@prisma/client';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
-    private usersRepository: UsersRepository,
+    private userRepository: UserRepository,
     private mailService: MailService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const findUser: User | null = await this.usersRepository.findByEmail(
+    const findUser: User | null = await this.userRepository.findByEmail(
       createUserDto.email,
     );
 
@@ -31,17 +31,17 @@ export class UsersService {
       throw new ConflictException('Email already exists');
     }
 
-    const user: User = await this.usersRepository.create(createUserDto);
+    const user: User = await this.userRepository.create(createUserDto);
 
     return user;
   }
 
   async findAll() {
-    return this.usersRepository.findAll();
+    return this.userRepository.findAll();
   }
 
   async findOne(id: string) {
-    const findUser: User | null = await this.usersRepository.findOne(id);
+    const findUser: User | null = await this.userRepository.findOne(id);
 
     if (!findUser) {
       throw new NotFoundException('User not found');
@@ -51,33 +51,33 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    const findUser: User = await this.usersRepository.findByEmail(email);
+    const findUser: User = await this.userRepository.findByEmail(email);
 
     return findUser;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const findUser: User | null = await this.usersRepository.findOne(id);
+    const findUser: User | null = await this.userRepository.findOne(id);
 
     if (!findUser) {
       throw new NotFoundException('User not found!');
     }
 
-    return this.usersRepository.update(id, updateUserDto);
+    return this.userRepository.update(id, updateUserDto);
   }
 
   async remove(id: string) {
-    const findUser = await this.usersRepository.findOne(id);
+    const findUser = await this.userRepository.findOne(id);
 
     if (!findUser) {
       throw new NotFoundException('User not found!');
     }
 
-    return this.usersRepository.delete(id);
+    return this.userRepository.delete(id);
   }
 
   async sendEmailResetPassword(informEmailDto: InformEmailDto) {
-    const user: User | null = await this.usersRepository.findByEmail(
+    const user: User | null = await this.userRepository.findByEmail(
       informEmailDto.email,
     );
 
@@ -87,7 +87,7 @@ export class UsersService {
 
     const resetToken: string = randomUUID();
 
-    await this.usersRepository.updateToken(informEmailDto.email, resetToken);
+    await this.userRepository.updateToken(informEmailDto.email, resetToken);
 
     const resetPasswordTemplate = await this.mailService.resetPasswordTemplate(
       informEmailDto.email,
@@ -102,7 +102,7 @@ export class UsersService {
     informNewPasswordDto: InformNewPasswordDto,
     tokenDto: TokenDto,
   ) {
-    const user: User | null = await this.usersRepository.findByToken(
+    const user: User | null = await this.userRepository.findByToken(
       tokenDto.token,
     );
 
@@ -110,7 +110,7 @@ export class UsersService {
       throw new NotFoundException('User Not found');
     }
 
-    await this.usersRepository.updatePassword(
+    await this.userRepository.updatePassword(
       user.id,
       informNewPasswordDto.password,
     );

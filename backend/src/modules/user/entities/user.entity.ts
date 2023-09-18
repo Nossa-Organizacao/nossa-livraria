@@ -36,6 +36,7 @@ export class User {
   avatar: string | null;
 
   @ApiPropertyOptional()
+  @Exclude()
   resetToken: string | null;
 
   constructor() {

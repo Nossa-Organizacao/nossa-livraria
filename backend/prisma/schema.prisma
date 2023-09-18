@@ -69,8 +69,8 @@ model Comment {
 
 model Chapter {
   id String @id
-  text String
   title String
+  text String
   createdAt DateTime @default(now())
 
   book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
