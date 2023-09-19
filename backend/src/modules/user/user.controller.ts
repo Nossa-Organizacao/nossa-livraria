@@ -69,8 +69,6 @@ export class UserController {
     description: 'Lista de usuários',
     isArray: true,
   })
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   findAll() {
     return this.userService.findAll();
   }
@@ -92,8 +90,6 @@ export class UserController {
     description: 'Você não tem permissão de acessar os dados do usuário.',
     type: UnauthorizedSwagger,
   })
-  @UseGuards(JwtAuthGuard, UserPermissionGuard)
-  @ApiBearerAuth()
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.findOne(id);
   }

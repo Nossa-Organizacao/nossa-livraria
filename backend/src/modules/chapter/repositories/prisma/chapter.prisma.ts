@@ -46,11 +46,7 @@ export class ChapterPrismaRepository implements ChapterRepository {
     const chapter: Chapter = await this.prisma.chapter.findFirst({
       where: { id },
       include: {
-        book: {
-          include: {
-            chapters: true
-          }
-        },
+        comments: true
       },
     });
     return chapter;
@@ -60,11 +56,7 @@ export class ChapterPrismaRepository implements ChapterRepository {
     const chapter: Chapter = await this.prisma.chapter.update({
       where: { id },
       include: {
-        book: {
-          include: {
-            chapters: true
-          }
-        },
+        comments: true
       },
       data: { ...data },
     });

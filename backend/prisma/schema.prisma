@@ -24,7 +24,6 @@ model User {
   resetToken String?
 
   favorites UserSeguir[]
-
   books Book[]
   comments Comment[]
 
@@ -46,7 +45,6 @@ model Book {
   userId String
 
   fans UserSeguir[]
-
   chapters Chapter[]
 
   @@map("books")

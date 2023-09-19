@@ -1,6 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { randomUUID } from 'crypto';
+import { UpdateUserDto } from 'src/modules/user/dto/update-user.dto';
 
 export class Comment {
   @ApiProperty()
@@ -26,3 +27,12 @@ export class Comment {
     this.id = randomUUID();
   }
 }
+
+export class UserRelation extends PartialType(
+  OmitType(UpdateUserDto, ['password'] as const),
+) {}
+
+export class CommentRelationUser extends Comment {
+  user: UserRelation
+}
+
