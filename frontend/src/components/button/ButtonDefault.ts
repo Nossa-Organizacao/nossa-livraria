@@ -5,9 +5,12 @@ interface ButtonProps {
   $size?: number;
   $weight?: string;
   $border?: boolean;
+  $borderColor?: string;
   $color?: string;
   $background?: string;
   $display?: boolean;
+  $hoverBackground?: string;
+  $hoverColor?: string;
   $disable?: boolean;
   $minWidth?: number;
   $maxWidth?: number;
@@ -17,7 +20,11 @@ const Button = styled.button<ButtonProps>`
   min-height: var(--button-height-1);
   border-radius: var(--button-border);
 
-  border: ${({ $border }) => ($border ? "var(--border-button-1)" : "none")};
+  border: solid
+    ${({ $border }) => ($border ? "var(--border-button-1)" : "none")};
+
+  border-color: ${({ $borderColor }) =>
+    $borderColor ? `var(--${$borderColor})` : "var(--color-white)"};
 
   width: ${({ $width }) =>
     $width ? `var(--button-width-${$width})` : "var(--button-width-1)"};
@@ -40,11 +47,19 @@ const Button = styled.button<ButtonProps>`
   font-weight: ${({ $weight }) =>
     $weight ? `var(--${$weight})` : "var(button-width-5)"};
 
+  cursor: ${({ $disable }) => ($disable ? "none" : "pointer")};
+
+  :hover {
+    background-color: ${({ $hoverBackground }) =>
+      $hoverBackground ? `var(--${$hoverBackground})` : "var(--color-black)"};
+
+    background-color: ${({ $hoverColor }) =>
+      $hoverColor ? `var(--${$hoverColor})` : "var(--color-white)"};
+  }
+
   @media (min-width: 1024px) {
     display: ${({ $display }) => ($display ? "none" : "block")};
   }
-
-  cursor: ${({ $disable }) => ($disable ? "none" : "pointer")};
 `;
 
 export { Button };
