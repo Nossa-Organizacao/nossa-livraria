@@ -19,6 +19,13 @@ body {
 	--color-black:#0d1d10;
 	--color-white:#f9feff;
 
+	--color-brown-01:#72411B;
+	--color-brown-02:#592F0F;
+	--color-brown-03:#3D1A00;
+
+	--color-green-01:#0A5E5B;
+	--color-green-02:#004439;
+
 
 	--color-grey-scale-0: #0b0d0d;
 	--color-grey-scale-1: #212529;
@@ -62,7 +69,7 @@ body {
 	--font-medium: 500;
 	--font-base: 400;
 
-	--button-border: 2px;
+	--button-border: 3px;
 	--input-border: 4px;
 
 	--button-width-0: 5rem; 
