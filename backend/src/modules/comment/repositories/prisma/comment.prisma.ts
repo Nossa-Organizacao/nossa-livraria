@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateCommentDto } from '../../dtos/create-comment.dto';
-import { Comment } from '../../entities/comment.entity';
+import { Comment, CommentRelationUser } from '../../entities/comment.entity';
 import { CommentRepository } from '../comment.repository';
 import { Chapter } from 'src/modules/chapter/entities/chapter.entity';
 
@@ -37,24 +37,36 @@ export class CommentPrismaRepository implements CommentRepository {
     return newComment;
   }
 
-  async findAll(): Promise<Comment[] | []> {
-    const Comments: Comment[] | [] = await this.prisma.comment.findMany();
-    return Comments;
+  async findAll(): Promise<CommentRelationUser[] | []> {
+    const comments: CommentRelationUser[] | [] = await this.prisma.comment.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            initials: true,
+            color: true,
+            avatar: true,
+          }
+        }
+      }
+    });
+
+    return comments;
   }
 
   async findOne(id: string): Promise<Comment> {
-    const Comment: Comment = await this.prisma.comment.findFirst({
+    const comment: Comment = await this.prisma.comment.findFirst({
       where: { id },
     });
-    return Comment;
+    return comment;
   }
 
   async update(id: string, data: CreateCommentDto): Promise<Comment> {
-    const Comment: Comment = await this.prisma.comment.update({
+    const comment: Comment = await this.prisma.comment.update({
       where: { id },
       data: { ...data },
     });
-    return Comment;
+    return comment;
   }
 
   async delete(id: string): Promise<void> {

@@ -55,5 +55,5 @@ export class CreateUserDto {
   @ApiPropertyOptional({ default: null })
   @IsString()
   @IsOptional()
-  resetToken: string | null;
+  resetToken: string | null = null
 }

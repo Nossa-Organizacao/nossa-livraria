@@ -26,7 +26,11 @@ export class UserPrismaRepository implements UserRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const users: User[] | [] = await this.prisma.user.findMany();
+    const users: User[] | [] = await this.prisma.user.findMany({
+      include: {
+        books: true
+      }
+    });
 
     return plainToInstance(User, users);
   }
@@ -34,6 +38,9 @@ export class UserPrismaRepository implements UserRepository {
   async findOne(id: string): Promise<User> {
     const user: User | null = await this.prisma.user.findUnique({
       where: { id },
+      include: {
+        books: true
+      }
     });
 
     return plainToInstance(User, user);
