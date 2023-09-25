@@ -11,6 +11,7 @@ interface ButtonProps {
   $display?: boolean;
   $hoverBackground?: string;
   $hoverColor?: string;
+  $hoverBorder?: string;
   $disable?: boolean;
   $minWidth?: number;
   $maxWidth?: number;
@@ -19,6 +20,7 @@ interface ButtonProps {
 const Button = styled.button<ButtonProps>`
   min-height: var(--button-height-1);
   border-radius: var(--button-border);
+  transition: 300ms;
 
   border: solid
     ${({ $border }) => ($border ? "var(--border-button-1)" : "none")};
@@ -55,6 +57,8 @@ cursor: ${({ $disable }) => ($disable ? "not-allowed" : "pointer")};
 
     color: ${({ $hoverColor }) =>
       $hoverColor ? `var(--color-${$hoverColor})` : "var(--color-white)"};
+
+    /* border-color: ${({ $hoverBorder }) => ($hoverBorder ? "var(--color-${hoverBorder})" : "var(--color-white)")}; */
   }
 
   /* @media (min-width: 1024px) {
