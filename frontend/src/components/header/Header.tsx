@@ -10,7 +10,7 @@ const Header = () => {
         <img src={IconSite} alt="Icone" />
         {/* <span>Deixe suas histórias serem vista!</span> */}
         <form action="submit">
-          <input type="text" />
+          <input type="text" placeholder="pequisar obra ou autor..." />
           <button>
             <GiArchiveResearch />
           </button>
@@ -19,10 +19,9 @@ const Header = () => {
         <section>
           <Button
             type="button"
-            $border={false}
-            $background="black"
-            $hoverBackground="white"
-            $hoverColor="black"
+            $border={true}
+            $background="green-02"
+            $hoverBackground="green-01"
             $width={3}
           >
             Criar Conta
@@ -30,10 +29,9 @@ const Header = () => {
 
           <Button
             type="button"
-            $border={false}
-            $background="black"
-            $hoverBackground="white"
-            $hoverColor="black"
+            $border={true}
+            $background="green-02"
+            $hoverBackground="green-01"
             $width={3}
           >
             Logar

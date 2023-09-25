@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
 body {
 	font-family: 'Open Sans', sans-serif;
+	min-height:100vh;
 }
 
 .error{
@@ -11,14 +12,16 @@ body {
   }
 
 :root {
-	--color-branch-00:#2f363c;
-	--color-branch-01:#2b3034;
-	--color-branch-02:#bd8866;
-	--color-gray-00:#2e3336;
-	--color-green-05:#143019;
+	--color-branch-00:#FFE8D6;
+	--color-branch-01:#DDBEA9;
+	--color-branch-02:#CB997E;
+	--color-sec-00:#B7B7A4;
+	--color-sec-01:#A5A58D;
+	--color-sec-02:#6B705C;
 	--color-black:#0d1d10;
 	--color-white:#f9feff;
-
+	
+	--color-brown-00:#bd8866;
 	--color-brown-01:#72411B;
 	--color-brown-02:#592F0F;
 	--color-brown-03:#3D1A00;
