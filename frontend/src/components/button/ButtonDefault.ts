@@ -24,19 +24,19 @@ const Button = styled.button<ButtonProps>`
     ${({ $border }) => ($border ? "var(--border-button-1)" : "none")};
 
   border-color: ${({ $borderColor }) =>
-    $borderColor ? `var(--${$borderColor})` : "var(--color-white)"};
+    $borderColor ? `var(--color-${$borderColor})` : "var(--color-white)"};
 
   width: ${({ $width }) =>
     $width ? `var(--button-width-${$width})` : "var(--button-width-1)"};
 
   min-width: ${({ $minWidth }) =>
-    $minWidth ? `var(--button-width-${$minWidth})` : "none"};
+    $minWidth ? `var(--button-width-${$minWidth})` : "auto"};
 
   max-width: ${({ $maxWidth }) =>
     $maxWidth ? `var(--button-width-${$maxWidth})` : "none"};
 
   background-color: ${({ $background }) =>
-    $background ? `var(--${$background})` : "var(--color-black)"};
+    $background ? `var(--color-${$background})` : "var(--color-black)"};
 
   color: ${({ $color }) =>
     $color ? `var(--${$color})` : "var(--color-white)"};
@@ -45,21 +45,22 @@ const Button = styled.button<ButtonProps>`
     $size ? `var(--font-body-${$size})` : "var(--font-body-1)"};
 
   font-weight: ${({ $weight }) =>
-    $weight ? `var(--${$weight})` : "var(button-width-5)"};
+    $weight ? `var(--font-weight-${$weight})` : "var(--font-weight-5)"};
 
-  cursor: ${({ $disable }) => ($disable ? "none" : "pointer")};
 
-  :hover {
+cursor: ${({ $disable }) => ($disable ? "not-allowed" : "pointer")};
+  &:hover {
     background-color: ${({ $hoverBackground }) =>
-      $hoverBackground ? `var(--${$hoverBackground})` : "var(--color-black)"};
+      $hoverBackground ? `var(--color-${$hoverBackground})` : "var(--color-black)"};
 
-    background-color: ${({ $hoverColor }) =>
-      $hoverColor ? `var(--${$hoverColor})` : "var(--color-white)"};
+    color: ${({ $hoverColor }) =>
+      $hoverColor ? `var(--color-${$hoverColor})` : "var(--color-white)"};
   }
 
-  @media (min-width: 1024px) {
+  /* @media (min-width: 1024px) {
     display: ${({ $display }) => ($display ? "none" : "block")};
-  }
+  } */
 `;
+
 
 export { Button };
