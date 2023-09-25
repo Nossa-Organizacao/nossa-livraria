@@ -27,7 +27,7 @@ export function Footer() {
         Git
       </a>
 
-      <span>2022 - Todods os direitos reservados.</span>
+      <span>2023 - Todods os direitos reservados.</span>
 
       <div
         onClick={() => scrollToTop()}
