@@ -8,6 +8,7 @@ const HomePage = () => {
     <Main>
       <Header />
       <WorksBoard title="Últimos Capítulos Lançados" />
+      <WorksBoard title="Últimos Capítulos Lidos" />
       <Footer />
     </Main>
   );

@@ -10,7 +10,7 @@ export const Main = styled.footer`
   background-color: var(--color-brown-03);
   color: var(--color-grey-scale-10);
   text-align: center;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
   bottom: 0px;
 
