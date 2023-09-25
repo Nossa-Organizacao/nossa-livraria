@@ -21,14 +21,18 @@ export const Main = styled.footer`
     justify-content: center;
     border-radius: 5px;
     background-color: var(--color-grey-scale-2);
-    width: 50px;
-    height: 50px;
     cursor: pointer;
+    :hover {
+      border-radius: 5px;
+      background-color: var(--color-green-02);
+    }
   }
 
   .arrow > svg {
-    height: 100px;
-    width: 100px;
+    font-size: 50px;
+    padding: 5px;
+    color: var(--color-white);
+  
   }
 
   & > a {

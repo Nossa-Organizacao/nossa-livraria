@@ -20,7 +20,9 @@ const Header = () => {
           <Button
             type="button"
             $border={false}
-            $background="color-black"
+            $background="black"
+            $hoverBackground="white"
+            $hoverColor="black"
             $width={3}
           >
             Criar Conta
@@ -29,7 +31,9 @@ const Header = () => {
           <Button
             type="button"
             $border={false}
-            $background="color-black"
+            $background="black"
+            $hoverBackground="white"
+            $hoverColor="black"
             $width={3}
           >
             Logar
