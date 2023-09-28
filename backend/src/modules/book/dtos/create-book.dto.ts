@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsBoolean, IsDate, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
 
 export class CreateBookDto {
   @ApiProperty({ default: 'O livro de todos' })
@@ -18,8 +18,9 @@ export class CreateBookDto {
   cover: string | null;
 
   @ApiPropertyOptional({ default: false })
+  @IsOptional()
   @IsBoolean()
-  status: boolean | null;
+  status: boolean = true
 
   @ApiProperty({ default: '100' })
   @IsString()
