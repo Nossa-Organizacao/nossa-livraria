@@ -3,6 +3,7 @@ import { BookRepository } from '../book.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateBookDto } from '../../dtos/create-book.dto';
 import { Book } from '../../entities/book.entity';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class BookPrismaRepository implements BookRepository {
@@ -31,7 +32,7 @@ export class BookPrismaRepository implements BookRepository {
         userId: book.userId,
       },
     });
-    return newBook;
+    return plainToInstance(Book, newBook);
   }
 
   async findAll(): Promise<Book[] | []> {
