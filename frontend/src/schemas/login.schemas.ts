@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const schemaLoginRequest = z.object({
+export const loginRequestSchema = z.object({
   email: z
     .string()
     .min(1, {
@@ -10,10 +10,7 @@ export const schemaLoginRequest = z.object({
   password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres."),
 });
 
-export const schemaLoginResponse = z.object({
+export const loginResponseSchema = z.object({
   token: z.string(),
+  id: z.string(),
 });
-
-export type TLoginRequest = z.infer<typeof schemaLoginRequest>;
-
-export type TLoginResponse = z.infer<typeof schemaLoginResponse>;

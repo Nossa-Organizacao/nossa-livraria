@@ -1,21 +1,27 @@
 import { FormRegister } from "./RegisterFormStyle";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { TUserRegiste, schemaUserRegister } from "../../schemas/users.schemas";
+import { userRegisterSchema } from "../../schemas/users.schemas";
+import { TUserRegister } from "../../interfaces/users.interface";
+import { handleBirthDate } from "./utils";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserProvider/UserContext";
 
 const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TUserRegiste>({
+  } = useForm<TUserRegister>({
     mode: "onBlur",
-    resolver: zodResolver(schemaUserRegister),
+    resolver: zodResolver(userRegisterSchema),
   });
 
-  const onSubmitFunction = (data: any) => {
-    const color = Math.floor(Math.random() * 12) + 1;
+  const { userRegister } = useContext(UserContext);
 
+  const onSubmitFunction = (data: TUserRegister) => {
+    const color = Math.floor(Math.random() * 12) + 1;
+    console.log(color)
     let newColor = "";
 
     if (color == 1) {
@@ -44,15 +50,20 @@ const RegisterForm = () => {
       newColor = "var(--color-random-random-12)";
     }
 
+    const arrayNamesUser = data.name.split(" ");
+    const initials = `${arrayNamesUser[0][0]}${arrayNamesUser[1][0]}`
+
     const newData = {
       ...data,
       color: newColor,
       email: data.email.toLowerCase(),
+      initials: initials,
       resetToken: null,
     };
 
-    console.log(newData);
+    // userRegister(newData);
   };
+
   return (
     <FormRegister onSubmit={handleSubmit(onSubmitFunction)}>
       <h2>Bem-Vindo!</h2>
@@ -86,6 +97,8 @@ const RegisterForm = () => {
           id="birthDate"
           placeholder="Ex: 11/05/2000"
           {...register("birthDate")}
+          onKeyUp={(event) => handleBirthDate(event)}
+          maxLength={10}
         />
         <p className="error">{errors.birthDate?.message}</p>
       </div>

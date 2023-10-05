@@ -59,6 +59,7 @@ export const FormRegister = styled.form`
     border: 2px solid transparent;
     color: var(--color-white);
     background-color: var(--color-grey-scale-2);
+    cursor: pointer;
   }
   /* button:hover {
     border: solid 2px var(--color-grey-scale-grey-0);

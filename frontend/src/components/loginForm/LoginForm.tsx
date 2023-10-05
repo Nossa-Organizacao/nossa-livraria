@@ -1,21 +1,25 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { TLoginRequest, schemaLoginRequest } from "../../schemas/login.schemas";
+import { TLoginRequest, loginRequestSchema } from "../../schemas/login.schemas";
 import { FormLogin } from "./LoginFormStyle";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserProvider/UserContext";
 
 export const LoginForm = () => {
+  const { userLogin } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TLoginRequest>({
     mode: "onBlur",
-    resolver: zodResolver(schemaLoginRequest),
+    resolver: zodResolver(loginRequestSchema),
   });
 
   const onSubmitFunction = (data: TLoginRequest) => {
     console.log(data);
+    userLogin(data)
   };
 
   return (
