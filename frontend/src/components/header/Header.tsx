@@ -15,8 +15,11 @@ const Header = () => {
   const handleLoginClick = () => {
     navigate("/login");
   };
+
+
+
   return (
-    <HeaderStyle>
+    <HeaderStyle style={{height: "auto"}}>
       <div>
         <img src={IconSite} alt="Icone" />
         {isPageWithoutSearch && (
@@ -42,6 +45,8 @@ const Header = () => {
             )}
           </ol>
         </nav>
+
+
       </div>
     </HeaderStyle>
   );

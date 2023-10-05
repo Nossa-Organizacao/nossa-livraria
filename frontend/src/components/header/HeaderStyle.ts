@@ -6,8 +6,10 @@ const HeaderStyle = styled.header`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 90px;
-  padding: 5px;
+
+  height: auto;
+  padding: 20px;
+
   background-color: var(--color-brown-03);
 
   /* position: absolute;

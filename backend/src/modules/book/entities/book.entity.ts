@@ -10,13 +10,13 @@ export class Book {
   title: string;
 
   @ApiPropertyOptional()
-  synopsis: string | null;
+  synopsis: string;
 
   @ApiPropertyOptional()
   cover: string | null;
 
-  @ApiPropertyOptional()
-  status: boolean | null;
+  @ApiProperty()
+  status: boolean
 
   @ApiProperty()
   score: string;
