@@ -8,8 +8,8 @@ import { UpdateChapterDto } from './dtos/update-chapter.dto';
 export class ChapterService {
   constructor(private chapterRepository: ChapterRepository) {}
 
-  async create(data: CreateChapterDto, bookId: string) {
-    return await this.chapterRepository.create(data, bookId);
+  async create(data: CreateChapterDto, bookId: string, userId: string) {
+    return await this.chapterRepository.create(data, bookId, userId);
   }
 
   async findAll() {

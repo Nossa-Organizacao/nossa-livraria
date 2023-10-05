@@ -33,7 +33,7 @@ export class AuthService {
         { email, resetToken: user.resetToken },
         { subject: user.id },
       ), //Salva os dados na request.user
-      // id: user.id, //Aparece na resposta da requisição
+      id: user.id, //Aparece na resposta da requisição
       // email: email
     };
   }

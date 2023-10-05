@@ -26,6 +26,7 @@ model User {
   favorites UserSeguir[]
   books Book[]
   comments Comment[]
+  chapters Chapter[]
 
    @@map("user")
 }
@@ -73,6 +74,9 @@ model Chapter {
 
   book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   comments Comment[]
 

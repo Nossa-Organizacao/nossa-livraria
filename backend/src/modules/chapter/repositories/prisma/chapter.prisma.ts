@@ -8,13 +8,17 @@ import { ChapterRepository } from '../chapter.repository';
 export class ChapterPrismaRepository implements ChapterRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateChapterDto, bookId: string): Promise<Chapter> {
-
+  async create(
+    data: CreateChapterDto,
+    bookId: string,
+    userId: string,
+  ): Promise<Chapter> {
     const chapter: Chapter = new Chapter();
 
     Object.assign(chapter, {
       ...data,
       bookId: bookId,
+      userId: userId,
     });
 
     const newChapter: Chapter = await this.prisma.chapter.create({
@@ -25,6 +29,7 @@ export class ChapterPrismaRepository implements ChapterRepository {
         text: chapter.text,
         createdAt: chapter.createdAt,
 
+        userId: chapter.userId,
         bookId: chapter.bookId,
       },
     });
@@ -46,7 +51,8 @@ export class ChapterPrismaRepository implements ChapterRepository {
     const chapter: Chapter = await this.prisma.chapter.findFirst({
       where: { id },
       include: {
-        comments: true
+        book: true,
+        comments: true,
       },
     });
     return chapter;
@@ -56,7 +62,7 @@ export class ChapterPrismaRepository implements ChapterRepository {
     const chapter: Chapter = await this.prisma.chapter.update({
       where: { id },
       include: {
-        comments: true
+        comments: true,
       },
       data: { ...data },
     });

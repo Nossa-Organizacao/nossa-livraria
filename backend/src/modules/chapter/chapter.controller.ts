@@ -45,7 +45,7 @@ export class ChapterController {
   @UseGuards(JwtAuthGuard, createChapterPermissionGuard)
   @ApiBearerAuth()
   create(@Body() data: CreateChapterDto, @Request() req) {
-    return this.chapterService.create(data, req.body.bookId);
+    return this.chapterService.create(data, req.body.bookId, req.user.id);
   }
 
   @Get()
