@@ -18,6 +18,11 @@ export class BookPrismaRepository implements BookRepository {
     });
 
     const newBook: Book = await this.prisma.book.create({
+      include: {
+        chapters: true,
+        user: true,
+        fans: true
+      },
       data: {
         id: book.id,
 
@@ -51,6 +56,8 @@ export class BookPrismaRepository implements BookRepository {
       where: { id },
       include: {
         chapters: true,
+        user: true,
+        fans: true
       },
     });
     return book;
@@ -61,6 +68,8 @@ export class BookPrismaRepository implements BookRepository {
       where: { id },
       include: {
         chapters: true,
+        user: true,
+        fans: true
       },
       data: { ...data },
     });

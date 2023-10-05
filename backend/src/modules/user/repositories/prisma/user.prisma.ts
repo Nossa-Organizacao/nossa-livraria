@@ -39,7 +39,13 @@ export class UserPrismaRepository implements UserRepository {
     const user: User | null = await this.prisma.user.findUnique({
       where: { id },
       include: {
-        books: true
+        books: {
+          include: {
+            chapters: true,
+            user: true,
+            fans: true
+          },
+        }
       }
     });
 
@@ -65,6 +71,9 @@ export class UserPrismaRepository implements UserRepository {
   async update(id: string, data: UpdateUserDto): Promise<User> {
     const user: User = await this.prisma.user.update({
       where: { id },
+      include: {
+        books: true
+      },
       data: { ...data },
     });
 

@@ -1,8 +1,8 @@
 import { z } from "zod";
-// import { advertSchema } from "./adverts.schemas";
+import { allInformationBookSchema } from "./books.schema";
 
-export const schemaUser = z.object({
-  id: z.number(),
+export const userSchema = z.object({
+  id: z.string(),
 
   name: z.string().min(1, {
     message: "O nome é obrigatório.",
@@ -17,12 +17,8 @@ export const schemaUser = z.object({
 
   birthDate: z
     .string()
-    .min(8, {
-      message: " Data de Nascimento invalida.",
-    })
-    .refine((value) => /^[0-9]+$/.test(value), {
-      message: "Deve conter apenas caracteres numéricos",
-    }),
+    .nonempty("Data de nascimento é obrigatório")
+    .min(10, "dd/mm/aaaa"),
 
   aboutMe: z.string().min(1, {
     message: "A Descrição é obrigatória.",
@@ -30,14 +26,18 @@ export const schemaUser = z.object({
 
   color: z.string().nullish(),
 
-  inicial: z.string().nullish(),
+  initials: z.string().nullish(),
 
   avatar: z.string().nullish(),
 
   resetToken: z.string().nullish(),
 });
 
-export const schemaUserRegister = schemaUser
+export const userResponseSchema = userSchema.extend({
+  books: allInformationBookSchema.array(),
+});
+
+export const userRegisterSchema = userSchema
   .omit({
     id: true,
     createdAt: true,
@@ -53,7 +53,7 @@ export const schemaUserRegister = schemaUser
     path: ["confirm_password"],
   });
 
-export const schemaUserRequest = schemaUser.omit({
+export const userRequestSchema = userSchema.omit({
   id: true,
   createdAt: true,
 });
@@ -66,7 +66,7 @@ export const schemaUserRequest = schemaUser.omit({
 //   adverts: z.optional(advertSchema).array(),
 // });
 
-export const schemaUserUpdate = schemaUser
+export const userUpdateSchema = userSchema
   .omit({
     id: true,
     color: true,
@@ -77,7 +77,9 @@ export const schemaUserUpdate = schemaUser
   .partial();
 
 // export const usersSchema = userSchemaResponse.array();
-
-export type TUser = z.infer<typeof schemaUser>;
-
-export type TUserRegiste = z.infer<typeof schemaUserRegister>;
+export const userInCommentSchema = userRequestSchema.omit({
+  email: true,
+  birthDate: true,
+  aboutMe: true,
+  resetToken: true,
+});

@@ -4,6 +4,7 @@ import { Footer } from "../../components/footer/Footer";
 import { LoginForm } from "../../components/loginForm/LoginForm";
 
 const LoginPage = () => {
+
   return (
       <Main>
         <Header />

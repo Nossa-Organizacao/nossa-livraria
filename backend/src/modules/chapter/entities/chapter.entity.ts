@@ -15,6 +15,9 @@ export class Chapter {
   @ApiProperty()
   @Exclude()
   createdAt: Date;
+  
+  @ApiProperty()
+  userId: string;
 
   @ApiProperty()
   bookId: string;
