@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 body {
 	font-family: 'Open Sans', sans-serif;
 	min-height:100vh;
+	
 }
 
 .error{

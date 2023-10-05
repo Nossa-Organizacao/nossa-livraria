@@ -13,6 +13,13 @@ const WorkBox = styled.li`
       align-items: center;
       gap: 0.5rem;
   }
+
+  &:hover {
+    cursor: pointer;
+    transition:0.3s;
+    background-color: rgba(255, 232, 214, 0.5);
+    border-radius: 4px;
+  }
 `;
 
 export { WorkBox };
