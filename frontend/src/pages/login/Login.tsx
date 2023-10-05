@@ -13,5 +13,4 @@ const LoginPage = () => {
       </Main>
   );
 };
-
 export { LoginPage };
